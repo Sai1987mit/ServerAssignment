@@ -1,0 +1,6 @@
+= haml :errors, :layout => false
+%form(action="/events" method="POST")
+  %fieldset
+    %legend Create a new event
+    = haml :form, :layout => false
+  %input(type="submit" value="Create") or <a href='/events'>cancel</a>

@@ -1,0 +1,12 @@
+%h3 Events
+%a(href="/events/new")
+  Create a new event
+- unless @events.empty?
+  %ul#events
+  - @events.each do |event|
+    %li{:id => "event-#{event.id}"}
+      %a(href="/events/#{event.id}")= event.data
+      %a(href="/events/edit/#{event.id}") EDIT
+      %a(href="/events/delete/#{event.id}") DELETE
+- else
+  %p No events!

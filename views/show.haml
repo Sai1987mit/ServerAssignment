@@ -1,0 +1,6 @@
+%h3= @event.data
+%p Created at: #{@event.created_at}
+%p Last updated at: #{@event.updated_at}
+%a(href="/events/edit/#{@event.id}")EDIT
+%a(href="/events/delete/#{@event.id}")DELETE
+%a(href='/events') Back to index
