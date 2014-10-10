@@ -1,0 +1,4 @@
+%h3 Are you sure you want to delete #{@event.data}?
+%form(action="/events/#{@event.id}" method="post")
+  %input(type="hidden" name="_method" value="DELETE")
+  %input(type="submit" value="Delete") or <a href="/events">Cancel</a>

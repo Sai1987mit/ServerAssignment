@@ -1,0 +1,4 @@
+-if @event.errors.any?
+  %ul#errors
+  -@event.errors.each do |error|
+    %li= error
