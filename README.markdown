@@ -58,18 +58,29 @@ In Storage > Under Controller [Click on the CD symbol] > In the Attributes > CD 
   This means that the application is ready to be used.
 
 2)Once the server is running.The application can be tested from terminal as well as from browser:
+  
   1)Testing from terminal:
     Open a new tab
+    
     1) curl "http://localhost:8999/events"   - to get all events[the events could be empty thus create the events first]
+
     2) curl "http://localhost:8999/events/2" - to get a particular event
+
     3) curl -X POST "http://localhost:8999/events" -H "Content-Type: application/json" -d '{"data":"sample"}' - to add an event
+
     4) curl -X PUT "http://localhost:8999/events" -H "Content-Type: application/json" -d '{"data":"NAME is now at LATITUDE/LONGITUDE"}'  -to edit an event
+
     5) curl -X DELETE "http://localhost:8999/events" -to delete all event
+
     6) curl -X DELETE "http://localhost:8999/events/2"  - to delete a particular event
   
-  2)Testing from browser
+  2)Testing from browser:
     Go to the address http://localhost:8999/events
+    
     1) Here we can create a new event or browse all the events already created
+    
     2) Along with events we have edit and delete event actions
+    
     3) On click of edit, we can either update or cancel action
+    
     4) Similarily on click of delete, we can either delete or cancel the action
