@@ -38,11 +38,13 @@ In Storage > Under Controller [Click on the CD symbol] > In the Attributes > CD 
   rvm use jruby-1.7.13
 
 5)We can clone the code at from git at https://github.com/Sai1987mit/ServerAssignment.git
+  ```
   Bundle Install 
   if bundler is not present 
   sudo gem install bundler
+  The project comes with a database events.db, thus the below command is not required.
   rake db:migrate  [would create the database: events.db]
-
+  ```
 ####Starting the application and testing
 1)Start the server using 
   jruby app.rb
