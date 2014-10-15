@@ -70,6 +70,7 @@ DEPENDENCIES
   activerecord-jdbcsqlite3-adapter
   haml
   jdbc-sqlite3
+  json
   puma
   shotgun
   sinatra

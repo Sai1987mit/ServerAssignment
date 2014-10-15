@@ -9,6 +9,7 @@ gem 'haml'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'activerecord-jdbcsqlite3-adapter'
+gem 'json'
 
 group :development do 
   gem 'shotgun' 

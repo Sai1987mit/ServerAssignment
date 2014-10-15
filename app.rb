@@ -1,6 +1,7 @@
 require 'bundler'
 require 'sinatra'
 require 'sinatra/activerecord'
+require "sinatra/json"
 require './lib/event.rb'
 require 'json'
 
@@ -10,9 +11,11 @@ set :port, 8999
 # All REST processes
 
 # Get all the events
-  get '/events' do
-    @events = Event.all 
-    haml :index   
+  get '/events' do    
+    content_type :json
+    @events = Event.all   
+    eve = @events.to_json    
+  #  haml :index   
   end
 
 # Get the newly created event   
@@ -23,8 +26,14 @@ set :port, 8999
 
 # Show a single event on click
   get '/events/:id' do
-    @event = Event.find(params[:id])
-    haml :show
+    begin
+    content_type :json
+    @event = Event.find(params[:id])   
+    @event.to_json
+    #haml :show
+    rescue ActiveRecord::RecordNotFound
+      status 404      
+    end
   end
 
 # Edit event
@@ -34,7 +43,7 @@ set :port, 8999
   end
 
 # Create a new event   
-  post '/events' do
+  post '/events' do    
     if params[:event]
       @event = Event.new(params[:event])
     else
@@ -43,7 +52,7 @@ set :port, 8999
     end
     if @event.save
       status 201
-      redirect '/events/' + @event.id.to_s
+     # redirect '/events/' + @event.id.to_s
     else
       status 400
       haml :new
@@ -52,6 +61,7 @@ set :port, 8999
 
 # Update the event 
   put '/events/:id' do
+     begin
     @event = Event.find(params[:id])
     if params[:event]
       if @event.update(params[:event])
@@ -63,20 +73,29 @@ set :port, 8999
       end
     else      
       data  = JSON.parse(request.body.read)
+      
       if @event.update(data)
         status 201
-        redirect '/events/' + params[:id]
+     #   redirect '/events/' + params[:id]
       else
         status 400
         haml :edit  
-      end
+      end    
+    end
+    rescue ActiveRecord::RecordNotFound
+      status 404      
     end
   end
 
 # Delete the event 
   delete '/events/:id' do
-    Event.find(params[:id]).destroy
-    redirect '/events'  
+    begin
+    @event=Event.find(params[:id]).destroy
+    rescue  ActiveRecord::RecordNotFound
+      status 404      
+    end
+    
+    #redirect '/events'  
   end
   
 # Delete all events
